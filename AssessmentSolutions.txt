@@ -1,0 +1,50 @@
+/*Sibghat Ullah Rayyan Shaikh
+1831773042
+CSE311L.1 Assessment */
+
+//1:
+
+SELECT b.BOOK_ID, b.Title, b.Publisher_Name, a.Author_Name, d.Branch_ID, c.No_OF_COPIES 
+FROM book b, book_authors a, book_copies c, library_branch d 
+where b.BOOK_ID=a.BOOK_ID AND b.BOOK_ID=c.BOOK_ID AND d.BRANCH_ID=c.BRANCH_ID
+
+//2:
+SELECT Card_No 
+FROM book_lending '
+WHERE Date_OUT BETWEEN '2017-01-01' AND '2017-06-01' 
+GROUP BY CARD_NO HAVING Count(*)>3
+
+//3: 
+SELECT b.BOOK_ID "ID",b.TITLE "TITLE",b.PUBLISHER_NAME "Publishers' Name", a.AUTHOR_NAME "Author" 
+FROM book b JOIN book_copies c ON (b.BOOK_ID=c.BOOK_ID) 
+INNER JOIN library_branch d ON (d.BRANCH_ID=c.BRANCH_ID) 
+INNER JOIN book_authors a ON (b.BOOK_ID=a.BOOK_ID) 
+WHERE c.NO_OF_COPIES=1
+
+//4:
+SELECT b.BOOK_ID ,b.TITLE "TITLE",b.PUBLISHER_NAME "Publishers' Name", a.AUTHOR_NAME "Author" 
+FROM book b JOIN book_copies c ON (b.BOOK_ID=c.BOOK_ID) 
+INNER JOIN library_branch d ON (d.BRANCH_ID=c.BRANCH_ID) 
+INNER JOIN book_authors a ON (b.BOOK_ID=a.BOOK_ID) 
+WHERE c.NO_OF_COPIES>2 AND TITLE LIKE '%A%'
+
+//5:
+SELECT DISTINCT b.BOOK_ID, b.TITLE, b.PUBLISHER_NAME, a.AUTHOR_NAME 
+FROM book b, book_authors a, book_lending d 
+WHERE b.BOOK_ID=a.BOOK_ID AND b.BOOK_ID=d.BOOK_ID
+
+//6: 
+UPDATE book 
+SET title= "Database Management" 
+WHERE book_id= 1;
+
+//7:
+Delete From Book
+Where Book_ID = 2;
+
+//8:
+Create View View_Books As
+Select b.Book_ID, b.Title, c.NO_Of_Copies
+From Book b, Book_Copies c, library_branch d
+Where b.Book_ID = c.Book_ID
+AND c.Branch_ID = d.Branch_ID;
